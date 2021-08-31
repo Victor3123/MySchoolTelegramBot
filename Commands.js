@@ -1,4 +1,4 @@
-const opt = require("/home/user/private-keys-for-tb/options.json");
+const opt = require("options.json");
 
 
 class Commands {

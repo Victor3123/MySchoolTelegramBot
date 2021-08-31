@@ -1,6 +1,6 @@
 const Commands = require('./Commands');
 
-const opt = require("/home/user/private-keys-for-tb/options.json");
+const opt = require("options.json");
 
 const ONE_DAY = 86400000;
 
