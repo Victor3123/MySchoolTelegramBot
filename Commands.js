@@ -1,4 +1,4 @@
-const opt = require("options.json");
+const opt = require("./options.json");
 
 
 class Commands {
