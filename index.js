@@ -1,26 +1,26 @@
+const Commands = require('./Commands');
+
+const opt = require("/home/user/private-keys-for-tb/options.json");
+
+const ONE_DAY = 86400000;
+
+const commands = new Commands();
+
 const TelegramApi = require('node-telegram-bot-api');
 
-const token = '1898471406:AAFH_e_NimVD5Z95eZ_W8LhBBqJLKS6lUW0';;
-
-const bot = new TelegramApi(token, {polling: true});
-
-const oneDay = 86400000;
-
-
+const bot = new TelegramApi(opt.token, {polling: true});
 
 setHomework();
 
 function setHomework() {
     setTimeout(() => {
-        bot.sendMessage(-1001398634824, );
+        bot.sendMessage(opt.classGroupChatId);
         setHomework();
-    }, oneDay)
+    }, ONE_DAY)
 }
 
-
-
 bot.on('new_chat_members', msg => {
-    if (msg.chat.id == -1001398634824){
+    if (msg.chat.id == opt.classGroupChatId) {
         bot.sendMessage(msg.chat.id, `Hello ${msg.new_chat_member.first_name}! You are added to our school group. I am bot Ghost. I do all the routine work.`);
     }
 })
@@ -31,22 +31,10 @@ bot.on('message', msg => {
     const username = msg.from.username;
     const firstName = msg.from.first_name;
 
-    let firstSimbols = '';
+    commands.ifHelp(text)
+    if (commands.ifHelp(text) === true)
+        bot.sendMessage(opt.myChatId, `\n\n\n\nusername: ${username}\n first_name: ${firstName}\n Waiting for help ... \n question is: \n${text}`);
 
-    for (let i = 0; i < 7; i++) {
-        firstSimbols = firstSimbols + text[i];
-    }
-
-    console.log(firstSimbols);
-
-    if (firstSimbols == '/bot -h') {
-        bot.sendMessage(655121468, `\n\n\n\nusername: ${username}\n first_name: ${firstName}\n Waiting for help ... \n question is: \n${text}`)
-    }
-
-    if (text == `/bot`) {
-        bot.sendMessage(msg.chat.id, `Please enter full command.\nOn this time avalible commands like:\n/bot -help *question*`)
-    }
+    if (text == `/bot`)
+        bot.sendMessage(msg.chat.id, `Please enter full command.\nOn this time avalible commands like:\n/bot -h *question*`);
 })
-
-
-
