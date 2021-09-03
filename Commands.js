@@ -3,7 +3,7 @@ const opt = require("./options.json");
 
 class Commands {
     /**
-     * @param string;
+     * @param {string} text;
      */
     ifHelp(text) {
         let firstSimbols = '';

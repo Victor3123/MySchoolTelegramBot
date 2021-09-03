@@ -2,9 +2,13 @@ const Commands = require('./Commands');
 
 const opt = require("./options.json");
 
+const Filter = require('./Filter.js');
+
 const ONE_DAY = 86400000;
 
 const commands = new Commands();
+
+const filter = new Filter();
 
 const TelegramApi = require('node-telegram-bot-api');
 
@@ -30,6 +34,11 @@ bot.on('message', msg => {
     const chatId = msg.chat.id;
     const username = msg.from.username;
     const firstName = msg.from.first_name;
+
+    if (filter.ifbadWord(text)) {
+        // bot.editMessageText('messsage is unavailable', '');
+        bot.deleteMessage(msg.chat.id, msg.message_id);
+    }
 
     commands.ifHelp(text)
     if (commands.ifHelp(text) === true)
