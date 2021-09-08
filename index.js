@@ -35,13 +35,10 @@ bot.on('message', msg => {
     const username = msg.from.username;
     const firstName = msg.from.first_name;
 
-    if (filter.ifbadWord(text)) {
-        // bot.editMessageText('messsage is unavailable', '');
+    if (filter.ifbadWord(text))
         bot.deleteMessage(msg.chat.id, msg.message_id);
-    }
 
-    commands.ifHelp(text)
-    if (commands.ifHelp(text) === true)
+    if (commands.ifHelp(text))
         bot.sendMessage(opt.myChatId, `\n\n\n\nusername: ${username}\n first_name: ${firstName}\n Waiting for help ... \n question is: \n${text}`);
 
     if (text == `/bot`)
