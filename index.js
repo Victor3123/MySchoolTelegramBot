@@ -44,3 +44,9 @@ bot.on('message', msg => {
     if (text == `/bot`)
         bot.sendMessage(msg.chat.id, `Please enter full command.\nOn this time avalible commands like:\n/bot -h *question*`);
 })
+
+bot.on('edited_message', msg => {
+    const text = msg.text;
+    if (filter.ifbadWord(text))
+        bot.deleteMessage(msg.chat.id, msg.message_id);
+})
