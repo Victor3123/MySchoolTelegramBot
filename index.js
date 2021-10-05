@@ -22,6 +22,10 @@ server.on('connection', ws => {
     ws.send('Hello');
 })
 
+server.on('message', (response) => {
+    bot.sendMessage(opt.classGroupChatId, response.data)
+})
+
 setHomework();
 
 function setHomework() {
