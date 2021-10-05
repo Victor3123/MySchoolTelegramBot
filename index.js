@@ -4,6 +4,8 @@ const opt = require("./options.json");
 
 const Filter = require('./Filter.js');
 
+const WebSocket = require('ws');
+
 const ONE_DAY = 86400000;
 
 const commands = new Commands();
@@ -13,6 +15,12 @@ const filter = new Filter();
 const TelegramApi = require('node-telegram-bot-api');
 
 const bot = new TelegramApi(opt.token, {polling: true});
+
+const server = new WebSocket.Server({ port:8000 } );
+
+server.on('connection', ws => {
+    ws.send('Hello');
+})
 
 setHomework();
 

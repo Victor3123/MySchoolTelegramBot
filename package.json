@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "node-telegram-bot-api": "^0.54.0",
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "ws": "^8.2.3"
   }
 }
